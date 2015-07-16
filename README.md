@@ -5,7 +5,7 @@ NodeJS news-microservice
 
 1. Clone this repository:
    ```sh
-$ git clone https://github.com/CanopyCloud/microservice-nodejs.git news-microservice
+$ git clone https://github.com/CanopyCloud/news-microservice.git  news-microservice
 ```
 
 2. Go into the folder:
@@ -21,7 +21,7 @@ $ sudo docker-compose up
 ### Installation instructions using containers linking
 1. Clone this repository:
    ```sh
-$ git clone https://github.com/CanopyCloud/microservice-nodejs.git news-microservice
+$ git clone https://github.com/CanopyCloud/news-microservice.git news-microservice
 ```
 
 2. Build the docker container
@@ -34,9 +34,9 @@ $ sudo docker build -t news-microservice ./news-microservice
 $ sudo docker run -it --rm --name mongo -p 27017:27017 mongo
 ```
 
-5. Run the microservice docker container and link it with RabbitMQ and MongoDB
+5. Run the microservice docker container and link it with MongoDB
    ```sh
-$ sudo docker run -p 8080:80 --name app --link rabbitmq:rabbitmq --link mongo:mongo microservice-nodejs
+$ sudo docker run -p 8080:80 --name app --link mongo:mongo news-microservice
 ```
 
 ### Random notes
