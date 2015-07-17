@@ -18,9 +18,8 @@ app.get('/', function (req, res) {
 });
 
 app.post('/save', adds.addNews);
-
 app.get('/all', gets.findAll);
-app.get('/find', gets.findByTitle);
+app.post('/find', gets.findByTitle);
 
 app.get('/info', function (req,res) {
   res.send(info.showInfo());
