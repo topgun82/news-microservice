@@ -5,8 +5,8 @@ var TEST       = process.env.NODE_ENV === "test";
 var S          = require('string'); 
 
 config.express = {
-  port: process.env.EXPRESS_PORT || 3000,
-  ip: "127.0.0.1"
+  port: process.env.VCAP_APP_PORT || 3000,
+  ip: process.env.VCAP_APP_HOST || "127.0.0.1"
 };
 
 //config.rabbitmq = {
@@ -47,7 +47,13 @@ if (TEST) {
 //config.rabbitmqURL = "amqp://" + config.rabbitmq.login + ":" + config.rabbitmq.password +
 //  "@" + config.rabbitmq.host + ":" + config.rabbitmq.port;
 
+if(process.env.VCAP_SERVICES){
+  var env = JSON.parse(process.env.VCAP_SERVICES);
+  config.mongodbURL = "mongodb://51f9f7a9-60d9-4330-9f12-7f9a2202a3c4:ebcce3d021a712269e15108126e8b826@192.168.2.65:27017/e2340900-38d5-4924-a96b-6dc70e67c40c"
+}
+else {
 config.mongodbURL = "mongodb://" + config.mongodb.host + ":" + config.mongodb.port +
   "/" + config.mongodb.db + "_" + currentENV;
+}
 
 config.currentENV = currentENV;

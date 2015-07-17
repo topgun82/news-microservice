@@ -20,7 +20,7 @@ services.getMongoDbConnection(function(err, db) {
           log.error("Unable to listen for connections", error);
           process.exit(10);
         }
-        log.info("Server is listening on http://" +
+        log.info("Secure server listening on https://" +
         config.express.ip + ":" + config.express.port);
       });
 //    } else {

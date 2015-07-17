@@ -2,7 +2,17 @@ var express = require('express');
 var config  = require('./config');
 var path    = require('path');
 var app     = express();
-var server  = require('http').createServer(app);
+var fs      = require('fs');
+
+var sslOptions = {
+  key: fs.readFileSync('./ssl/server.key'),
+  cert: fs.readFileSync('./ssl/server.crt'),
+  ca: fs.readFileSync('./ssl/ca.crt'),
+  requestCert: true,
+  rejectUnauthorized: false
+};
+
+var server  = require('https').createServer(sslOptions, app);
 
 var info = require('./lib/controllers/info');
 var adds = require('./lib/controllers/addNews');
