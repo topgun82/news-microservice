@@ -4,9 +4,10 @@ var path    = require('path');
 var app     = express();
 var server  = require('http').createServer(app);
 
-var info = require('./lib/controllers/info');
-var adds = require('./lib/controllers/addNews');
-var gets = require('./lib/controllers/getNews');
+var info   = require('./lib/controllers/info');
+var adds   = require('./lib/controllers/addNews');
+var gets   = require('./lib/controllers/getNews');
+var delets = require('./lib/controllers/deleteNews');
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:true})); 
@@ -19,7 +20,9 @@ app.get('/', function (req, res) {
 
 app.post('/save', adds.addNews);
 app.get('/all', gets.findAll);
-app.post('/find', gets.findByTitle);
+app.post('/find/:title', gets.findByTitle);
+app.delete('/delete', delets.deleteAllNews); 
+app.delete('/delete/:title', delets.deleteByTitle);
 
 app.get('/info', function (req,res) {
   res.send(info.showInfo());
