@@ -14,19 +14,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());  
 app.disable('etag');
 
-app.get('/', function (req, res) {
-  res.send('Hello there !\n');
-});
-
+app.get('/', info.showInfo);
 app.post('/save', adds.addNews);
 app.get('/all', gets.findAll);
 app.post('/find/:title', gets.findByTitle);
 app.delete('/delete', delets.deleteAllNews); 
 app.delete('/delete/:title', delets.deleteByTitle);
-
-app.get('/info', function (req,res) {
-  res.send(info.showInfo());
-});
 
 app.use(function(req, res, next) {
   var err = new Error('Not found');
