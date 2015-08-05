@@ -9,6 +9,11 @@ var adds   = require('./lib/controllers/addNews');
 var gets   = require('./lib/controllers/getNews');
 var delets = require('./lib/controllers/deleteNews');
 
+var Services    = require('./services');
+
+var services = new Services();
+app.set('services',services);
+
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:true})); 
 app.use(bodyParser.json());  

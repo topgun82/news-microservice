@@ -2,26 +2,32 @@
 var mongodb = require('mongodb').MongoClient;
 var config  = require('./config');
 
-var mongodbConn;
+function Services() {
+  var self = this;
+  self.db = null;
+}
 
-function getMongoDbConnection(callback) {
-  if (mongodbConn && mongodbConn.state == 'connected') {
-    callback(null, mongodbConn);
-  } else {
-    mongodb.connect(config.mongodbURL, function(err, conn) {
-      if (err) {
-        console.log("Failed to connect to MongoDB: ", err);
-        callback(err, null);
-      } else {
-        mongodbConn = conn;
-        mongodbConn.on("close", function(error){
-          mongodbConn = null;
-          console.log("Connection to MongoDB was closed!");
-        });
-        callback(err, mongodbConn);
-      }
+Services.prototype.connect = function(cb) {
+  var self = this;
+
+  mongodb.connect(config.mongodbURL, function(err, conn) {
+    if (err) return cb(err);
+    self.db = conn;
+
+    self.db.on('close', function(error) {
+      //self.db = null;
     });
-  }
+
+    cb(null,self.db);
+  });
+}
+
+Services.prototype.getMongoDbConnection = function(cb) {
+  var self = this;  
+
+  if (!self.db) return self.connect(cb);
+
+  cb(null,self.db);
 }
 
 //var rabbitmqConnection;
@@ -43,5 +49,5 @@ function getMongoDbConnection(callback) {
 //    }
 //}
 
-exports.getMongoDbConnection  = getMongoDbConnection;
+module.exports = Services;
 //exports.getRabbitMqConnection = getRabbitMqConnection;

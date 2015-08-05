@@ -49,7 +49,7 @@ if (TEST) {
 
 if(process.env.VCAP_SERVICES){
   var env = JSON.parse(process.env.VCAP_SERVICES);
-  config.mongodbURL = env['p-mongodb'][0]['credentials']['uri'];
+  config.mongodbURL = env['mongodb'][0]['credentials']['uri'];
 }
 else {
   config.mongodbURL = "mongodb://" + config.mongodb.host + ":" + config.mongodb.port +

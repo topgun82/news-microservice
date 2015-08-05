@@ -1,5 +1,5 @@
 applications:
-- name: news-microservice
+- name: news-app
   command: node server.js
   memory: 256M
   instances: 1
