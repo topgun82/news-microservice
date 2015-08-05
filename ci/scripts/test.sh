@@ -1,4 +1,4 @@
 #!/bin/bash
-cd news-microservice
+cd news
 npm install
 npm test
