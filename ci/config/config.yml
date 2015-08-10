@@ -3,4 +3,4 @@ image: "docker:///node"
 inputs:
  - name: news
 run:
-path: ./news/ci/scripts/test.sh
+ path: ./news/ci/scripts/test.sh
